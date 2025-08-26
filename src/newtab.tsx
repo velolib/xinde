@@ -106,7 +106,7 @@ export default function NewTabPage() {
 
   return (
     <div
-      className="flex h-screen w-screen items-center justify-center min-h-0 relative"
+      className="flex h-screen w-screen items-center justify-center min-h-0 relative overflow-hidden bg-black"
       style={{
         backgroundImage: `url('${backgroundImage}')`,
         backgroundSize: "cover",
@@ -114,6 +114,7 @@ export default function NewTabPage() {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <div className="overlay" />
       <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/30"></div>
 
       {/* Content Container */}
