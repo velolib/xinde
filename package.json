@@ -1,7 +1,7 @@
 {
   "name": "xinde",
-  "displayName": "Xinde",
-  "version": "0.0.1",
+  "displayName": "xinde",
+  "version": "1.0.0",
   "description": "A no nonsense new tab extension.",
   "author": "velolib. vlocitize@gmail.com",
   "scripts": {
@@ -10,6 +10,8 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@plasmohq/storage": "^1.15.0",
+    "idb": "^8.0.3",
     "plasmo": "0.90.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -28,6 +30,7 @@
   "manifest": {
     "host_permissions": [
       "https://*/*"
-    ]
+    ],
+    "permissions": ["unlimitedStorage"]
   }
 }
