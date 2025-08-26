@@ -1,16 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { openDB } from "idb"
 import "~style.css"
 import { initDB } from "./lib/idb"
+import placeholderImage from "data-base64:~assets/placeholder.svg"
 
 function IndexPopup() {
   const [quoteDraft, setQuoteDraft] = useState("")
   const [newQuote, setNewQuote] = useState("")
   const [quotes, setQuotes] = useState<string[]>([])
-  const [backgroundImages, setBackgroundImages] = useState<string[]>(["https://placehold.co/600x400.png"])
-  const [displayedImages, setDisplayedImages] = useState<string[]>(["https://placehold.co/800x400.png"])
+  const [backgroundImages, setBackgroundImages] = useState<string[]>([placeholderImage])
+  const [displayedImages, setDisplayedImages] = useState<string[]>([placeholderImage])
   const [settings, setSettings] = useState({
     backgroundMode: "random", // "random" or "daily"
     displayedMode: "random", // "random" or "daily"
@@ -35,7 +35,7 @@ function IndexPopup() {
       if (dataUrls.length > 0) {
         setBackgroundImages(dataUrls)
       } else {
-        setBackgroundImages(["https://placehold.co/600x400.png"])
+        setBackgroundImages([placeholderImage])
       }
 
       const displayedTx = db.transaction("displayedImages", "readonly")
@@ -45,7 +45,7 @@ function IndexPopup() {
       if (displayedDataUrls.length > 0) {
         setDisplayedImages(displayedDataUrls)
       } else {
-        setDisplayedImages(["https://placehold.co/800x400.png"])
+        setDisplayedImages([placeholderImage])
       }
 
       const settingsData = await db.get("settings", "main")
@@ -117,7 +117,7 @@ function IndexPopup() {
     const updatedImages = backgroundImages.filter((_, i) => i !== index)
     setBackgroundImages(updatedImages)
 
-    if (!imageToRemove.includes("placehold.co")) {
+    if (!imageToRemove.includes(placeholderImage)) {
       const db = await initDB()
       const tx = db.transaction("images", "readwrite")
       const store = tx.objectStore("images")
@@ -136,7 +136,7 @@ function IndexPopup() {
     const updatedImages = displayedImages.filter((_, i) => i !== index)
     setDisplayedImages(updatedImages)
 
-    if (!imageToRemove.includes("placehold.co")) {
+    if (!imageToRemove.includes(placeholderImage)) {
       const db = await initDB()
       const tx = db.transaction("displayedImages", "readwrite")
       const store = tx.objectStore("displayedImages")
@@ -308,7 +308,7 @@ function IndexPopup() {
             {backgroundImages.map((img, idx) => (
               <div key={idx} className="relative group">
                 <img
-                  src={img || "/placeholder.svg"}
+                  src={img || placeholderImage}
                   alt={`Background ${idx + 1}`}
                   className="w-full h-20 object-cover rounded-lg border border-zinc-300"
                 />
@@ -366,7 +366,7 @@ function IndexPopup() {
             {displayedImages.map((img, idx) => (
               <div key={idx} className="relative group">
                 <img
-                  src={img || "/placeholder.svg"}
+                  src={img || placeholderImage}
                   alt={`Displayed ${idx + 1}`}
                   className="w-full h-20 object-cover rounded-lg border border-zinc-300"
                 />

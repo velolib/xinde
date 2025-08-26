@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import "~style.css"
 import { initDB } from "./lib/idb"
+import placeholderImage from "data-base64:~assets/placeholder.svg"
 
 const getDayBasedIndex = (arrayLength: number, seed = ""): number => {
   const today = new Date().toDateString() + seed
@@ -19,8 +20,8 @@ export default function NewTabPage() {
   const [currentTime, setCurrentTime] = useState("")
   const [currentDate, setCurrentDate] = useState("")
   const [quote, setQuote] = useState("Welcome to xinde!")
-  const [backgroundImage, setBackgroundImage] = useState("https://placehold.co/600x400.png")
-  const [displayedImage, setDisplayedImage] = useState("https://placehold.co/800x400.png")
+  const [backgroundImage, setBackgroundImage] = useState(placeholderImage)
+  const [displayedImage, setDisplayedImage] = useState(placeholderImage)
 
   // ---- Load quotes, background images, displayed images, and settings from IndexedDB ----
   useEffect(() => {
@@ -148,7 +149,7 @@ export default function NewTabPage() {
 
             <div className="relative z-10 size-full border border-white/20 rounded-xl">
               <img
-                src={displayedImage || "/placeholder.svg"}
+                src={displayedImage || placeholderImage}
                 alt="Featured image"
                 className="w-full h-full object-cover rounded-xl shadow-lg"
               />
